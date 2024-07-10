@@ -6,7 +6,9 @@ import Lab3 from "./Lab3";
 export default function Labs() {
   return (
     <div>
+      <h1>Yu Wang</h1>
       <h1>Labs</h1>
+      <a href="https://github.com/759257989/kanbas-react-web-24-su2.git" id="wd-github">My Github Page</a>
       <TOC />
       <Routes>
         <Route path="/" element={<Navigate to="Lab1" />} />
