@@ -1,0 +1,15 @@
+.wd-assignment-list-item{
+    border-left: 3px solid green !important;
+}
+
+#wd-assignments-editor {
+    width: 100%;
+    max-width: 100%;
+  }
+
+
+  .bordered-div {
+    border: 1px solid #ccc; /* Adjust the border color and width as needed */
+    padding: 15px; /* Optional: Adds padding inside the border */
+    border-radius: 5px; /* Optional: Adds rounded corners */
+  }
