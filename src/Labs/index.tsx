@@ -9,19 +9,24 @@ import { Provider } from "react-redux";
 export default function Labs() {
   return (
     <Provider store={store}>
-    <div>
-      <h1>Yu Wang</h1>
-      <h1>Labs</h1>
-      <a href="https://github.com/759257989/kanbas-react-web-24-su2.git" id="wd-github">My Github Page</a>
-      <TOC />
-      <Routes>
-        <Route path="/" element={<Navigate to="Lab1" />} />
-        <Route path="Lab1" element={<Lab1 />} />
-        <Route path="Lab2" element={<Lab2 />} />
-        <Route path="Lab3/*" element={<Lab3 />} />
-        <Route path="Lab4/*" element={<Lab4 />} />
-      </Routes>
-    </div>
+      <div>
+        <h1>Yu Wang</h1>
+        <h1>Labs</h1>
+        <a
+          href="https://github.com/759257989/kanbas-react-web-24-su2.git"
+          id="wd-github"
+        >
+          My Github Page
+        </a>
+        <TOC />
+        <Routes>
+          <Route path="/" element={<Navigate to="Lab1" />} />
+          <Route path="Lab1" element={<Lab1 />} />
+          <Route path="Lab2" element={<Lab2 />} />
+          <Route path="Lab3/*" element={<Lab3 />} />
+          <Route path="Lab4/*" element={<Lab4 />} />
+        </Routes>
+      </div>
     </Provider>
   );
 }
