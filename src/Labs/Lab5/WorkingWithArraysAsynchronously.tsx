@@ -50,6 +50,9 @@ export default function WorkingWithArraysAsynchronously() {
   return (
     <div id="wd-asynchronous-arrays">
       <h3>Working with Arrays Asynchronously</h3>
+      {errorMessage && (
+        <div id="wd-todo-error-message" className="alert alert-danger mb-2 mt-2">{errorMessage}</div>
+      )}
       <h4>Todos</h4>
       <FaPlusCircle onClick={createTodo} className="text-success float-end fs-3"
                          id="wd-create-todo" />
