@@ -7,12 +7,25 @@ import Modules from "./Modules";
 import Home from "./Home";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa6";
+import PeopleTable from "./People/Table";
+import PeopleDetails from "./People/Details";
+import { useEffect, useState } from "react";
+import * as client from "./client";
 
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
+  // const [users, setUsers] = useState([]);
 
+  // const fetchUsers = async () => {
+  //   const users = await client.fetchUsers();
+  //   setUsers(users);
+  // };
+
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
   // console.log("cid:", cid);
   // console.log("courses:", courses);
   // console.log("course:", course);
@@ -35,6 +48,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
             <Route path="Grades" element={<Grades/>}/>
+            <Route path="People" element={<PeopleTable />} />
+            <Route path="People/:uid" element={<PeopleTable />} />
           </Routes>
         </div>
       </div>

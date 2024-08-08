@@ -40,6 +40,7 @@ export default function CoursesNavigation() {
     { label: "Assignments", path: `/Kanbas/Courses/${cid}/Assignments`, id: "wd-course-assignments-link" },
     { label: "Quizzes", path: `/Kanbas/Courses/${cid}/Quizzes`, id: "wd-course-quizzes-link" },
     { label: "Grades", path: `/Kanbas/Courses/${cid}/Grades`, id: "wd-course-grades-link" },
+    { label: "People", path: `/Kanbas/Courses/${cid}/People`, id: "wd-course-people-link" },
   ];
 
   return (
