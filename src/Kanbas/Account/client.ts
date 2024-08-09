@@ -1,4 +1,3 @@
-
 import axios from "axios";
 const axiosWithCredentials = axios.create({ withCredentials: true });
 export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
@@ -9,7 +8,6 @@ export const signin = async (credentials: any) => {
 };
 export const profile = async () => {
   const response = await axiosWithCredentials.post(`${USERS_API}/profile`);
-  console.log("response profile: ", response)
   return response.data;
 };
 export const signup = async (user: any) => {
