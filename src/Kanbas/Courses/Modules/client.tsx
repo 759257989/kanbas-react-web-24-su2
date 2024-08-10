@@ -5,6 +5,7 @@ const COURSES_API = `${REMOTE_SERVER}/api/courses`;
 const MODULES_API = `${REMOTE_SERVER}/api/modules`;
 export const deleteModule = async (moduleId: string) => {
   const response = await axios.delete(`${MODULES_API}/${moduleId}`);
+  console.log("modules client deletemodules data: ", response)
   return response.data;
 };
 
@@ -25,3 +26,10 @@ export const updateModule = async (module: any) => {
   const response = await axios.put(`${MODULES_API}/${module._id}`, module);
   return response.data;
 };
+
+
+export const findCourseById = async (courseId: string) => {
+  const response = await axios.get(`${COURSES_API}/${courseId}`);
+  console.log("find result from find course by id in client module: ", response)
+  return response.data;
+}
