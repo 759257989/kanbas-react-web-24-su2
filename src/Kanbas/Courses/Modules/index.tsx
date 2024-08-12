@@ -14,7 +14,7 @@ import * as client from "./client";
 
 export default function Modules() {
   const { cid } = useParams();
-  console.log("moduole cid: ", cid)
+  console.log("moduole cid in modules.index.tsx: ", cid)
   const [theCurrentCourse, setCurrentCourse] = useState<any>(null);
   
 

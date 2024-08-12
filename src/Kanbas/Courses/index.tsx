@@ -11,24 +11,13 @@ import PeopleTable from "./People/Table";
 import PeopleDetails from "./People/Details";
 import { useEffect, useState } from "react";
 import * as client from "./client";
+import Quizzes from "./Quizzes";
 
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
-  // const [users, setUsers] = useState([]);
-
-  // const fetchUsers = async () => {
-  //   const users = await client.fetchUsers();
-  //   setUsers(users);
-  // };
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
-  // console.log("cid:", cid);
-  // console.log("courses:", courses);
-  // console.log("course:", course);
+ 
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
@@ -53,28 +42,10 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Grades" element={<Grades/>}/>
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />
+            <Route path="Quizzes" element={<Quizzes/>} />
           </Routes>
         </div>
       </div>
     </div>
-
-    //     <div id="wd-courses">
-    //   <h2 className="text-danger">
-    //       <FaAlignJustify className="me-4 fs-4 mb-1" />
-    //       Course 1234
-    //   </h2>
-    //   <hr />
-    //   <CoursesNavigation />
-    //   <div>
-
-    //     <Routes>
-    //       <Route path="Home" element={<Home />} />
-    //       <Route path="Modules" element={<Modules />} />
-    //       <Route path="Assignments" element={<Assignments />} />
-    //       <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-    //     </Routes>
-    //   </div>
-
-    // </div>
   );
 }
