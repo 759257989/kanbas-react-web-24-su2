@@ -9,25 +9,26 @@ import React, { useState , useEffect } from "react";
 import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
+import ProtectedRouteFaculty from "./ProtectedRouteFaculty";
 
 
 
 export default function Modules() {
   const { cid } = useParams();
-  console.log("moduole cid in modules.index.tsx: ", cid)
+  // console.log("moduole cid in modules.index.tsx: ", cid)
   const [theCurrentCourse, setCurrentCourse] = useState<any>(null);
   
 
   //client 从mongodb中查找所用的course 有id == cid的，然后保存下来
   const currentCourse = async (cid: any) => {
     const result = await client.findCourseById(cid)
-    console.log("the result get from find course by id in index model: ", result)
+    // console.log("the result get from find course by id in index model: ", result)
     
     setCurrentCourse(result)
   }
 
 
-  console.log("current course in modules: ", theCurrentCourse)
+  // console.log("current course in modules: ", theCurrentCourse)
   // const { courseNumber } = useParams<{ courseNumber: string }>();
   // console.log("moduole coursenumber: ", courseNumber)
   const [moduleName, setModuleName] = useState("");
@@ -40,7 +41,7 @@ export default function Modules() {
   };
 
   const removeModule = async (moduleId: string) => {
-    console.log("Delete button clicked for moduleId:", moduleId); // Add this line
+    // console.log("Delete button clicked for moduleId:", moduleId); // Add this line
     await client.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
@@ -57,22 +58,6 @@ export default function Modules() {
     dispatch(setModules(modules));
   };
 
-  // useEffect(() => {
-  //   currentCourse(cid);
-  //   fetchModules();
-  // }, []);
-
-  // useEffect(() => {
-  //   const loadCourseAndModules = async () => {
-  //     await currentCourse(cid);
-  //     if (theCurrentCourse) {
-  //       await fetchModules();
-  //     }
-  //   };
-    
-  //   loadCourseAndModules();
-  // }, [cid, theCurrentCourse]); // Run this effect whenever cid or theCurrentCourse changes
-
   useEffect(() => {
     currentCourse(cid);
   }, [cid]);
@@ -85,6 +70,8 @@ export default function Modules() {
 
   return (
     <div id="wd-modules">
+      <ProtectedRouteFaculty>
+        {/* only FACULTY account can see the module creating buttons  */}
       <ModulesControls
         moduleName={moduleName}
         setModuleName={setModuleName}
@@ -93,11 +80,12 @@ export default function Modules() {
           setModuleName("");
         }}
       />
+      
       <br />
       <br />
       <br />
       <br />
-
+      </ProtectedRouteFaculty>
       <ul id="wd-modules" className="list-group rounded-0">
         {modules
           // .filter((module: any) => module.course === cid)
@@ -117,6 +105,8 @@ export default function Modules() {
                     }
                   }} />
                 )}
+                <ProtectedRouteFaculty>
+                   {/* only FACULTY account can see the module creating buttons  */}
                 <ModuleControlButtons
                   moduleId={module._id}
                   deleteModule={(moduleId) => {
@@ -124,6 +114,7 @@ export default function Modules() {
                   }}
                   editModule={(moduleId) => dispatch(editModule(moduleId))}
                 />
+                </ProtectedRouteFaculty>
               </div>
 
               {module.lessons && (

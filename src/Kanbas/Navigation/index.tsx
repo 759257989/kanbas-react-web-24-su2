@@ -13,7 +13,7 @@ export default function KanbasNavigation() {
     { label: "Labs",      path: "/Labs",             icon: LiaCogSolid },
   ];
   return (
-    <div id="wd-kanbas-navigation" className="list-group rounded-0">
+    <div id="wd-kanbas-navigation" className="list-group rounded-0 vh-100">
       <a id="wd-account-link" target="_blank" href="https://www.northeastern.edu/"
         className="list-group-item bg-black border-0">
         <img src="/images/NEU.jpg" width="75px" /></a>

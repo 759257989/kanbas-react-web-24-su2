@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import Account from "./Account";
 import ProtectedRoute from "./ProtectedRoute";
 import { useSelector } from "react-redux";
+import QuizDetailsScreen from "./Courses/Quizzes/QuizDetailsScreen";
 
 export default function Kanbas() {
   //keep track of the current user
@@ -137,7 +138,7 @@ useEffect(() => {
                 path="Courses/:cid/*"
                 // when user is signed in
                 element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute> }
-              />
+              />            
               <Route path="Calendar" element={<h1>Calendar</h1>} />
               <Route path="Inbox" element={<h1>Inbox</h1>} />
             </Routes>

@@ -12,6 +12,9 @@ import PeopleDetails from "./People/Details";
 import { useEffect, useState } from "react";
 import * as client from "./client";
 import Quizzes from "./Quizzes";
+import QuizDetailsScreen from "./Quizzes/QuizDetailsScreen";
+import QuizEditor from "./Quizzes/QuizEditor";
+import TakeQuizStudent from "./Quizzes/TakeQuizStudent";
 
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
@@ -39,10 +42,16 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Modules" element={<Modules />} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+            
             <Route path="Grades" element={<Grades/>}/>
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />
             <Route path="Quizzes" element={<Quizzes/>} />
+            {/* <Route path="Kanbas/Courses/:cid/Quizzes/:qid" element={<QuizDetailsScreen />} /> */}
+            <Route path="Quizzes/:qid" element={<QuizDetailsScreen />} />
+            <Route path="Quizzes/:qid/Edit" element={<QuizEditor />} />
+            <Route path="Quizzes/:qid/Start" element={<TakeQuizStudent />} />
+
           </Routes>
         </div>
       </div>

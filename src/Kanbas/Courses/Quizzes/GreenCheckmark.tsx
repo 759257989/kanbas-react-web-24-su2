@@ -1,11 +1,20 @@
-import { FaCheckCircle } from "react-icons/fa";
-import { FaCircle } from "react-icons/fa";
-export default function GreenCheckmark() {
+import React from 'react';
+import { FaCheckCircle, FaCircle } from "react-icons/fa";
+
+interface GreenCheckmarkProps extends React.HTMLAttributes<HTMLSpanElement> {
+  onClick?: () => void; // Optional onClick handler
+}
+
+export default function GreenCheckmark({ className, onClick, ...props }: GreenCheckmarkProps) {
   return (
-    <span className="me-1 position-relative">
-      <FaCheckCircle style={{ top: "2px" }}
-        className="text-success me-1 position-absolute fs-5" />
-      <FaCircle className="text-white me-1 fs-6" />
+    <span
+      className={`me-1 position-relative ${className}`}
+      style={{ cursor: 'pointer' }}
+      onClick={onClick}
+      {...props}
+    >
+      <FaCircle className="text-white fs-6" />
+      <FaCheckCircle style={{ top: "2px" }} className="text-success position-absolute fs-5" />
     </span>
   );
 }

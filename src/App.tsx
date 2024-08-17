@@ -10,7 +10,7 @@ function App() {
         {/* let kanbas to use redux  */}
         <Provider store={store}>
         <Routes>
-          <Route path="/" element={<Navigate to="Labs" />} />
+          <Route path="/" element={<Navigate to="Kanbas" />} />
           <Route path="/Labs/*" element={<Labs />} />
           <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>

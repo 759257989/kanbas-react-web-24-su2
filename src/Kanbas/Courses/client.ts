@@ -30,6 +30,17 @@ export const fetchCoursesEnrolledByStudent = async (userId: string, enrolledCour
 //   return courses
 // };
 
+// export const findCourseById = async (cid: string) =>{
+//   const {data } = await axios.get(`${COURSES_API}/${cid}/id`);
+//   return data
+// }
+
+export const findCourseById = async (courseId: string) => {
+  const response = await axios.get(`${COURSES_API}/${courseId}`);
+  // console.log("find result from find course by id in course's client: ", response)
+  return response.data;
+}
+
 export const fetchCoursesByNumber = async (courseNumbers: any) => {
   // console.log("The course numbers received in client courses:", courseNumbers);
 

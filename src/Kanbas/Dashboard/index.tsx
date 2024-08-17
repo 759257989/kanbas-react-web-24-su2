@@ -112,13 +112,13 @@ export default function Dashboard({
         </h5>
 
         <br />
-        <label>Course Name</label>
+        <label><b>Course Name</b></label>
         <input
           value={course.name}
           className="form-control mb-2"
           onChange={(e) => setCourse({ ...course, name: e.target.value })}
         />
-        <label>Course Description</label>
+        <label><b>Course Description</b></label>
         <textarea
           value={course.description}
           className="form-control mb-2"
@@ -126,7 +126,7 @@ export default function Dashboard({
             setCourse({ ...course, description: e.target.value })
           }
         />
-        <label>Course Number</label>
+        <label><b>Course Number</b></label>
         <input
           value={course.number}
           className="form-control mb-2"

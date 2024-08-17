@@ -28,6 +28,7 @@ export default function NewAssignmentEditor({
               data-bs-dismiss="modal"
             ></button>
           </div>
+          
           <div className="modal-body">
             <label htmlFor="wd-description" className="form-label">
               Assignment Name

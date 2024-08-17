@@ -30,6 +30,6 @@ export const updateModule = async (module: any) => {
 
 export const findCourseById = async (courseId: string) => {
   const response = await axios.get(`${COURSES_API}/${courseId}`);
-  console.log("find result from find course by id in client module: ", response)
+  // console.log("find result from find course by id in client module: ", response)
   return response.data;
 }
