@@ -485,7 +485,7 @@ export default function QuizEditor() {
   };
 
   const handleCancel = () => {
-    navigate("/quizzes");
+    navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}`);
   };
 
   return (

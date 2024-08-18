@@ -28,8 +28,7 @@ export const StudentEnrollCourse = async (studentId: string, enrolledClasses: an
   return response.data;
 }
 
-
-//need to write routes function for StudentEnrollCourse that can upate the enrolled course
-// in user routes.js
-// then 
-// write a function to fetch all the courses enrolled by the student in dashboard index.tsx
+export const updateProfile= async (uId:string, profile:any) =>{
+  const response = await axiosWithCredentials.put(`${USERS_API}/${uId}/`, profile);
+  return response
+}
