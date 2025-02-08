@@ -1,16 +1,23 @@
 import Modules from "../Modules";
+import ProtectedRouteFaculty from "./ProtectedRouteFaculty";
 import CourseStatus from "./Status";
 export default function Home() {
   return (
-    <table id="wd-home">
-      <tr>
-        <td valign="top">
-          <Modules />
-        </td>
-        <td valign="top">
-          <CourseStatus />
-        </td>
-      </tr>
-    </table>
+    
+    
+<div id="wd-home" className="d-flex">
+  <div className="flex-fill me-5">
+    <Modules />
+   
+  </div>
+  <ProtectedRouteFaculty>
+    {/* only FACULTY account can see the module creating buttons  */}
+  <div className="d-none d-xl-block">
+    <CourseStatus />
+  </div>
+  </ProtectedRouteFaculty>
+</div>
+
+
   );
 }

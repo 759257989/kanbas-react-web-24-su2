@@ -1,148 +1,175 @@
+import React, { useEffect, useState } from "react";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useParams, useNavigate } from "react-router-dom";
+import * as db from "../../Database";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAssignment} from "./reducer";
+import * as client from "./client";
 export default function AssignmentEditor() {
-  return (
-    <div id="wd-assignments-editor">
-      <label htmlFor="wd-name">Assignment Name</label>
-      <input id="wd-name" value="A1 - ENV + HTML" />
-      <br />
-      <br />
-      <textarea id="wd-description">
-        The assignment is available online. Submit a link to the landing page of your project.
-      </textarea>
-      <br />
-      <table>
-        <tbody>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Points</label>
-            </td>
-            <td>
-              <input id="wd-ppoints" value={100} />
-            </td>
-          </tr>
+  const { aid } = useParams();
+  // const assignments = db.assignments;
+  const location = useLocation();
+  console.log(location)
+  console.log(aid);
+  
+  const navigate = useNavigate();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-group">Assignment Group</label>
-            </td>
-            <td>
-              <select name="assignmentgroup" id="wd-group">
-                <option value="A1">a1</option>
-                <option value="A2">a2</option>
-                <option value="A3">a3</option>
-              </select>
-            </td>
-          </tr>
+  const assignment = assignments.find((assignment: any) => assignment._id === aid);
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-display-grade-as">Display Grade as</label>
-            </td>
-            <td>
-              <select name="grade" id="wd-display-grade-as">
-                <option value="Percentage">Percentage</option>
-                <option value="Letter">Letter</option>
-              </select>
-            </td>
-          </tr>
+  const dispatch = useDispatch();
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-submission-type">Submission Type</label>
-            </td>
-            <td>
-              <select name="type" id="wd-submission-type">
-                <option value="Online">Online</option>
-                <option value="Paper">Paper</option>
-              </select>
-            </td>
-          </tr>
+  const saveAssignment = async (assignment: any) => {
+    const status = await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Online Entry Options</label>
-            </td>
-            <td>
-              <div id="wd-select-many-genre">
-                <div>
-                  <input
-                    type="checkbox"
-                    id="wd-text-entry"
-                    value="TEXTENTRY"
-                    defaultChecked
-                  />
-                  <label htmlFor="wd-text-entry">Text Entry</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="wd-website-url" value="WEBSITE" />
-                  <label htmlFor="wd-website-url">Website URL</label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="wd-media-recordings"
-                    value="MEDIA"
-                    defaultChecked
-                  />
-                  <label htmlFor="wd-media-recordings">Media Recordings</label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="wd-student-annotation"
-                    value="STUDENT"
-                  />
-                  <label htmlFor="wd-student-annotation">Student Annotation</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="wd-file-upload" value="FILE" />
-                  <label htmlFor="wd-file-upload">File Uploads</label>
-                </div>
-              </div>
-            </td>
-          </tr>
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    points: 0,
+    dueDate: '',
+    availableFrom: '',
+    availableUntil: '',
+  });
 
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-assign-to">Assign to</label>
-            </td>
-            <td>
-              <input
-                id="wd-assign-to"
-                type="text"
-                title="assign"
-                placeholder="Everyone"
-              />
-            </td>
-          </tr>
 
-          <tr>
-            <td>
-              <label htmlFor="wd-due-date">Due</label>
-            </td>
-            <td>
-              <input type="date" id="wd-due-date" value="2011-11-22" />
-            </td>
-          </tr>
+useEffect(() => {
+  if (assignment) {
+    setFormData({
+      title: assignment.title,
+      description: assignment.description,
+      points: assignment.points,
+      dueDate: assignment.dueDate,
+      availableFrom: assignment.availableFrom,
+      availableUntil: assignment.availableUntil,
+    });
+  }
+}, [assignment]);
 
-          <tr>
-            <td>
-              <label htmlFor="wd-available-from">Available from</label>
-            </td>
-            <td>
-              <input type="date" id="wd-available-from" value="2011-11-22" />
-            </td>
-          </tr>
+const handleChange = (e:any) => {
+    const { id, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+const handleSave = () => {
+  dispatch(updateAssignment({ ...assignment, ...formData }));
+  navigate(`/Kanbas/Courses/${assignment.course}/assignments`);
+};
 
-          <tr>
-            <td>
-              <label htmlFor="wd-available-until">Until</label>
-            </td>
-            <td>
-              <input type="date" id="wd-available-until" value="2011-11-22" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+const handleCancel = () => {
+  navigate(`/Kanbas/Courses/${assignment.course}/assignments`);
+};
+
+if (!assignment) {
+  return <div>Assignment not found</div>;
+}
+
+
+
+return (
+  <div id="wd-assignments-editor" className="container">
+    <div key={assignment._id}>
+      <div className="mb-3">
+        <label htmlFor="title" className="form-label">
+          Assignment Name
+        </label>
+        <input
+          id="title"
+          value={formData.title}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">
+          Description
+        </label>
+        <textarea
+          id="description"
+          value={formData.description}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="row mb-3">
+        <div className="col-md-4">
+          <label htmlFor="points" className="form-label">
+            Points
+          </label>
+        </div>
+        <div className="col-md-8">
+          <input
+            id="points"
+            value={formData.points}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+      </div>
+      <div className="row mb-3">
+        <div className="col-md-4">
+          <label htmlFor="dueDate" className="form-label">
+            Due Date
+          </label>
+        </div>
+        <div className="col-md-8">
+          <input
+            type="date"
+            id="dueDate"
+            value={formData.dueDate}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+      </div>
+      <div className="row mb-3">
+        <div className="col-md-4">
+          <label htmlFor="availableFrom" className="form-label">
+            Available From
+          </label>
+        </div>
+        <div className="col-md-8">
+          <input
+            type="date"
+            id="availableFrom"
+            value={formData.availableFrom}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+      </div>
+      <div className="row mb-3">
+        <div className="col-md-4">
+          <label htmlFor="availableUntil" className="form-label">
+            Available Until
+          </label>
+        </div>
+        <div className="col-md-8">
+          <input
+            type="date"
+            id="availableUntil"
+            value={formData.availableUntil}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <button onClick={handleSave} className="btn btn-danger float-end">
+            Save
+          </button>
+          <button onClick={handleCancel} className="btn btn-light me-2 float-end">
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
-  );
+  </div>
+);
 }
